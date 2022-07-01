@@ -9,10 +9,13 @@ import java.util.List;
 @Repository
 public interface BookRepository {
 
-    @Select("select * from book")
+    String SELECT_FROM_BOOK_WHERE_ID = "SELECT * FROM book WHERE id = #{id}";
+    String SELECT_FROM_BOOK = "select * from book";
+
+    @Select(SELECT_FROM_BOOK)
     List<Book> findAll();
 
-    @Select("SELECT * FROM book WHERE id = #{id}")
+    @Select(SELECT_FROM_BOOK_WHERE_ID)
     Book findById(long id);
 
     @Select("SELECT * FROM book WHERE title = #{title}")
