@@ -1,5 +1,7 @@
 
 spring:
+  application:
+    name: spring-boot-my-batis-postgres
   datasource:
     driver-class-name: org.postgresql.Driver
     username: dev

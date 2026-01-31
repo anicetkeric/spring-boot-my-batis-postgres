@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.text.MessageFormat;
 import java.util.List;
 
@@ -40,14 +40,14 @@ public class BookController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<SuccessResponse> getOne(@PathVariable("id") Long id) {
+    public ResponseEntity<SuccessResponse> getOne(@PathVariable Long id) {
         Book book = bookService.getOne(id);
         return new ResponseEntity<>(
                 new SuccessResponse(book, "Result found"), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<SuccessResponse> delete(@PathVariable("id") Long id) {
+    public ResponseEntity<SuccessResponse> delete(@PathVariable Long id) {
         bookService.deleteById(id);
         return new ResponseEntity<>(
                 new SuccessResponse(null, "Deletion completed successfully"), HttpStatus.OK);
