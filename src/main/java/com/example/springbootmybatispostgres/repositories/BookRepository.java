@@ -10,7 +10,7 @@ import java.util.List;
 public interface BookRepository {
 
     String SELECT_FROM_BOOK_WHERE_ID = "SELECT * FROM book WHERE id = #{id}";
-    String SELECT_FROM_BOOK = "select * from book";
+    String SELECT_FROM_BOOK = "SELECT * FROM book";
 
     @Select(SELECT_FROM_BOOK)
     List<Book> findAll();
@@ -22,13 +22,22 @@ public interface BookRepository {
     Book findByTitle(String title);
 
     @Delete("DELETE FROM book WHERE id = #{id}")
-    boolean deleteById(long id);
+    int deleteById(long id);
 
-    @Insert("INSERT INTO book(title, isbn, description, page, price) " +
-            " VALUES (#{title}, #{isbn}, #{description}, #{page}, #{price})")
+    @Insert("""
+        INSERT INTO book(title, isbn, description, page, price)
+        VALUES (#{title}, #{isbn}, #{description}, #{page}, #{price})
+    """)
     void insert(Book book);
 
-    @Update("Update book set title=#{title}, " +
-            " isbn=#{isbn}, description=#{description}, page=#{page}, price=#{price} where id=#{id}")
+    @Update("""
+        UPDATE book
+        SET title = #{title},
+            isbn = #{isbn},
+            description = #{description},
+            page = #{page},
+            price = #{price}
+        WHERE id = #{id}
+    """)
     int update(Book book);
 }
